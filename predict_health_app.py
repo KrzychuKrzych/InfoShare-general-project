@@ -142,15 +142,12 @@ def plot_charts(df):
             st.pyplot(fig)
         else:
             st.warning("Brak wymaganych kolumn 'activity_trimmed' lub 'Heart' w danych.")
-
-        st.divider()
-        st.subheader("Wykres tętna dla każdej aktywności")
                 
     else:
         st.warning("Najpierw wybierz użytkownika w zakładce 'Wczytaj dane'.")
 
 def predictive_heart_section():
-    
+    """Function to predict heart risk"""
     st.header("Ryzyko sercowe")
     st.divider()
     st.markdown("Sekcja ta analizuje dane dotyczące Twojego tętna, wieku oraz innych cech zdrowotnych, aby ocenić ryzyko problemów sercowo-naczyniowych. Na podstawie zaawansowanego algorytmu grupowania (KMeans) użytkownicy są przypisywani do jednego z trzech klastrów, które reprezentują różne poziomy ryzyka: niskie, umiarkowane lub wysokie. Wyniki są prezentowane w formie wykresu klastrów oraz szczegółowego opisu przypisanego klastru, wraz z rekomendacjami dotyczącymi stylu życia i działań prozdrowotnych. Dzięki tej analizie możesz lepiej zrozumieć swoje ryzyko sercowe i podjąć kroki w celu jego zmniejszenia.")
@@ -291,9 +288,7 @@ def activity_evaluation_section():
         st.warning("Najpierw wczytaj dane w zakładce 'Wczytaj dane'.")
         
 def improving_fitness():
-    """
-    Funkcja Streamlit do przewidywania poprawy kondycji użytkownika na podstawie modelu ML.
-    """
+    """Function to predtict improving fitness by person"""
     st.header("Przewidywanie poprawy kondycji")
 
     try:
@@ -400,18 +395,15 @@ def goals_and_progress():
 
 
 def what_if_section():
-    """Co jeśli? Sekcja przewidywania liczby kroków lub kalorii."""
+    """Function to predict steps and calories"""
     st.header("Sprawdź swoje możliwości")
     st.divider()
-    st.markdown(
-        "W tej sekcji możesz sprawdzić, ile kroków musisz zrobić, aby osiągnąć określoną liczbę spalonych kalorii, "
-        "lub ile kalorii spalisz przy zadanej liczbie kroków."
-    )
+    st.markdown("W tej sekcji możesz sprawdzić, ile kroków musisz zrobić, aby osiągnąć określoną liczbę spalonych kalorii, lub ile kalorii spalisz przy zadanej liczbie kroków.")
 
     filtered_data = st.session_state.get('filtered_data')
 
     if filtered_data is not None and not filtered_data.empty:
-        # Obliczenie średniego spalania kalorii na krok
+        
         total_steps = filtered_data['Steps'].sum()
         total_calories = filtered_data['Calories'].sum()
 
@@ -420,7 +412,6 @@ def what_if_section():
 
             st.write(f"### Twoje średnie spalanie kalorii na krok wynosi: {calories_per_step:.4f} kcal/krok.")
 
-            # Wybór trybu kalkulacji
             option = st.radio("Co chcesz obliczyć?", ["Ilość kroków na spalenie kalorii", "Spalone kalorie dla zadanych kroków"])
 
             if option == "Ilość kroków na spalenie kalorii":
@@ -440,7 +431,7 @@ def what_if_section():
         st.warning("Najpierw wczytaj dane w zakładce 'Wczytaj dane'.")
 
 def main():
-    
+    """Main aplication function"""
     with st.sidebar:
         st.markdown(
             """
